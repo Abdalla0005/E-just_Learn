@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EJUST TUBE</title>
+  <link href="https://cdn.jsdelivr.net/npm/[email protected]/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --ejust-red: #FF0000;
+      --dark-bg: #0f0f0f;
+      --darker-bg: #0f0f0f;
+      --card-bg: #212121;
+      --sidebar-bg: #0f0f0f;
+      --text-primary: #FFFFFF;
+      --text-secondary: #AAAAAA;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Header Styles */
+   header {
+  background-color: var(--darker-bg);
+  /* Make header taller: */
+  padding: 1.5rem 1rem;   /* Increased from 0.5rem 1rem */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  font-size: 2rem; /* Optional: make logo text larger */
+}
+
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      cursor: pointer;
+    }
+
+    .logo {
+      color: var(--text-primary);
+      font-weight: bold;
+      font-size: 1.4rem;
+      margin-right: 2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo i {
+      color: var(--ejust-red);
+      margin-right: 0.5rem;
+    }
+
+    .search-container {
+      flex-grow: 1;
+      display: flex;
+      max-width: 600px;
+      margin: 0 4rem;
+    }
+
+    .search-input {
+      flex-grow: 1;
+      padding: 0.5rem 1rem;
+      border-radius: 20px 0 0 20px;
+      border: 1px solid #333;
+      background: #121212;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .search-button {
+      padding: 0.5rem 1rem;
+      border-radius: 0 20px 20px 0;
+      border: 1px solid #333;
+      background: #333;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-actions > button {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      margin-left: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--ejust-red);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 240px;
+      height: calc(100vh - 60px);
+      position: fixed;
+      left: 0;
+      top: 60px;
+      background-color: var(--sidebar-bg);
+      overflow-y: auto;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar.collapsed {
+      width: 70px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+
+    .sidebar-item:hover {
+      background-color: #2d2d2d;
+    }
+
+    .sidebar-item i {
+      margin-right: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .sidebar-item.active {
+      background-color: #2d2d2d;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      margin-left: 240px;
+      padding: 1.5rem;
+      transition: margin-left 0.3s ease;
+    }
+
+    .main-content.full-width {
+      margin-left: 70px;
+    }
+
+    /* Category Navigation */
+    .category-nav {
+      display: flex;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .category-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-chip {
+      flex-shrink: 0;
+      padding: 0.5rem 1rem;
+      background-color: #333;
+      color: var(--text-primary);
+      border-radius: 16px;
+      margin-right: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .category-chip.active {
+      background-color: var(--text-primary);
+      color: var(--dark-bg);
+    }
+
+    /* Admin Panel */
+    .admin-panel {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-panel h2 {
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .upload-button {
+      background-color: var(--ejust-red);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Video Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      background-color: inherit;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .video-thumbnail {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      overflow: hidden;
+    }
+
+    .video-thumbnail img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .video-info {
+      display: flex;
+      padding: 0.8rem 0;
+    }
+
+   
+
+    .video-details {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .video-title {
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .channel-name, .video-meta {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Video Detail Page */
+    .video-detail-page {
+      display: none;
+      padding: 1.5rem;
+      margin-left: 240px;
+    }
+
+    .video-detail-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .primary-content {
+      flex: 1;
+      min-width: 640px;
+      margin-right: 1.5rem;
+    }
+
+    .secondary-content {
+      width: 350px;
+    }
+
+    .video-player {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background-color: black;
+      margin-bottom: 1rem;
+    }
+
+    .video-detail-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .video-detail-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .video-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .video-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .video-tag {
+      background-color: #333;
+      color: var(--text-primary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 16px;
+      font-size: 0.9rem;
+    }
+
+    /* History Page */
+    .history-container {
+      display: none;
+      margin-left: 240px;
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .empty-history {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* Role Selection */
+    .role-selection {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .role-header {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    .role-buttons {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .role-button {
+      width: 160px;
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #212121;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .role-button:hover {
+      transform: translateY(-10px);
+      background-color: #333;
+    }
+
+    .role-button.admin {
+      border: 2px solid var(--ejust-red);
+    }
+
+    .role-button i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--ejust-red);
+    }
+
+    .role-button span {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: rgba(255, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .video-card:hover .delete-btn {
+      opacity: 1;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+      .video-detail-container {
+        flex-direction: column;
+      }
+      
+      .primary-content {
+        margin-right: 0;
+        min-width: 100%;
+      }
+      
+      .secondary-content {
+        width: 100%;
+        margin-top: 2rem;
+      }
+
+      .video-detail-page,
+      .history-container {
+        margin-left: 70px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .main-content {
+        margin-left: 70px;
+      }
+      
+      .sidebar {
+        width: 70px;
+      }
+      
+      .sidebar-item span {
+        display: none;
+      }
+      
+      .sidebar-item i {
+        margin-right: 0;
+      }
+
+      .video-detail-page,
+      .history-container {
+        margin-left: 70px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-container {
+        margin: 0 1rem;
+      }
+      
+      .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 576px) {
+      .search-container {
+        display: none;
+      }
+      
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Role Selection Modal -->
+  <div class="role-selection" id="roleSelection">
+    <h2 class="role-header">Welcome to EJUST TUBE</h2>
+    <div class="role-buttons">
+      <div class="role-button admin" id="adminButton">
+        <i class="bi bi-person-gear"></i>
+        <span>Admin</span>
+      </div>
+      <div class="role-button" id="studentButton">
+        <i class="bi bi-person-video3"></i>
+        <span>Student</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <i class="bi bi-list menu-icon" id="menuToggle"></i>
+      <a href="#" class="logo"><i class="bi bi-youtube"></i> EJUST TUBE</a>
+    </div>
+    <div class="search-container">
+      <input type="text" class="search-input" placeholder="Search">
+      <button class="search-button"><i class="bi bi-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <button id="uploadBtn" style="display: none;"><i class="bi bi-upload"></i></button>
+      <div class="user-avatar">A</div>
+    </div>
+  </header>
+  
+  <!-- Simplified Sidebar with only History button -->
+  <div class="sidebar" id="sidebar">
+  <div style="margin-top: 20px;">
+    <div class="sidebar-item" id="historyButton">
+      <i class="bi bi-clock-history"></i>
+      <span>History</span>
+    </div>
+  </div>
+</div>
+  
+  <!-- Main Content - Gallery Page -->
+  <div class="main-content" id="mainContent">
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel" style="display: none;">
+      <h2>Upload Content</h2>
+      <div class="upload-buttons">
+        <button class="upload-button" id="addVideoBtn">
+          <i class="bi bi-youtube"></i> Add YouTube Video
+        </button>
+        <button class="upload-button" id="addImageBtn">
+          <i class="bi bi-image"></i> Add Google Drive Image
+        </button>
+      </div>
+    </div>
+    
+    <!-- Categories -->
+    <div class="category-nav" id="categoryNav">
+      <!-- Category chips will be generated dynamically -->
+    </div>
+    
+    <!-- Video Grid -->
+    <div class="video-grid" id="videoGrid">
+      <!-- Videos will be added dynamically -->
+    </div>
+  </div>
+  
+  <!-- Video Detail Page -->
+  <div class="video-detail-page" id="videoDetailPage">
+    <div class="video-detail-container">
+      <div class="primary-content">
+        <!-- Video Player -->
+        <div class="video-player" id="videoPlayer"></div>
+        
+        <!-- Video Info -->
+        <div class="video-detail-info">
+          <h1 class="video-detail-title" id="detailTitle"></h1>
+          
+          <div class="video-actions">
+            <div class="video-stats" id="videoStats"></div>
+          </div>
+          
+          <div class="video-tags" id="videoTags"></div>
+        </div>
+      </div>
+      
+      <div class="secondary-content">
+        <!-- Related Videos -->
+        <div class="related-videos" id="relatedVideos"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- History Page -->
+  <div class="history-container" id="historyContainer">
+    <h2 class="history-header">Watch History</h2>
+    <div class="video-grid" id="historyGrid"></div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('userAvatar').onclick = function() {
+    alert('Avatar clicked! (Add your modal logic here)');
+    // Example: document.getElementById('roleSelection').style.display = 'flex';
+  };
+});
+// Demo data with tags
+   
+ const videos = [
+      {
+        id: 'dQw4w9WgXcQ',
+        title: 'Introduction to Engineering Principles',
+        channel: 'EJUST Engineering',
+        timestamp: '2 weeks ago',
+        duration: '14:33',
+        thumbnail: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg',
+        description: 'This lecture covers the fundamental principles of engineering that every EJUST student should know.',
+        tags: ['Engineering', 'Introduction']
+      },
+      {
+        id: 'V74l_zS1x8E',
+        title: 'COMPUTER SCIENCE explained in 17 Minutes',
+        channel: 'Wacky Science',
+        timestamp: '11 months ago',
+        duration: '16:49',
+        thumbnail: 'https://i.ytimg.com/vi/V74l_zS1x8E/mqdefault.jpg',
+        description: 'Computer Science compressed into 17 minutes!',
+        tags: ['Computer Science', 'Programming']
+      },
+      {
+        id: 'LBEkcNfG4iQ',
+        title: 'ALL OF PHYSICS explained in 14 Minutes',
+        channel: 'Wacky Science',
+        timestamp: '1 year ago',
+        duration: '14:20',
+        thumbnail: 'https://i.ytimg.com/vi/LBEkcNfG4iQ/mqdefault.jpg',
+        description: 'Physics fundamentals explained simply and concisely.',
+        tags: ['Physics', 'Science']
+      },
+      {
+        id: 'JdHZ2jAFzzU',
+        title: 'Animation vs. Physics',
+        channel: 'Alan Becker',
+        timestamp: '1 year ago',
+        duration: '16:08',
+        thumbnail: 'https://i.ytimg.com/vi/JdHZ2jAFzzU/mqdefault.jpg',
+        description: 'Animation vs Physics! Watch as stick figures battle against the laws of physics.',
+        tags: ['Physics', 'Animation', 'Fun']
+      },
+      {
+        id: 'ZSFDm3UYkeE',
+        title: 'Animation vs. Math',
+        channel: 'Alan Becker',
+        timestamp: '1 year ago',
+        duration: '14:03',
+        thumbnail: 'https://i.ytimg.com/vi/ZSFDm3UYkeE/mqdefault.jpg',
+        description: 'Animation vs Mathematics! A creative way to visualize mathematical concepts through animation.',
+        tags: ['Mathematics', 'Animation', 'Fun']
+      }
+    ];
+
+    // DOM Elements
+    const roleSelection = document.getElementById('roleSelection');
+    const adminButton = document.getElementById('adminButton');
+    const studentButton = document.getElementById('studentButton');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const adminPanel = document.getElementById('adminPanel');
+    const videoGrid = document.getElementById('videoGrid');
+    const addVideoBtn = document.getElementById('addVideoBtn');
+    const addImageBtn = document.getElementById('addImageBtn');
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const videoDetailPage = document.getElementById('videoDetailPage');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const detailTitle = document.getElementById('detailTitle');
+    const videoStats = document.getElementById('videoStats');
+    const videoTags = document.getElementById('videoTags');
+    const relatedVideos = document.getElementById('relatedVideos');
+    const historyButton = document.getElementById('historyButton');
+    const historyContainer = document.getElementById('historyContainer');
+    const historyGrid = document.getElementById('historyGrid');
+    const categoryNav = document.getElementById('categoryNav');
+
+    // Current selected tag
+    let currentTag = 'All';
+    
+    // Initialize 
+    let isAdmin = false;
+
+    // Role Selection
+    adminButton.addEventListener('click', () => {
+      isAdmin = true;
+      roleSelection.style.display = 'none';
+      uploadBtn.style.display = 'block';
+      adminPanel.style.display = 'block';
+      renderCategoryChips();
+      renderVideos();
+    });
+
+    studentButton.addEventListener('click', () => {
+      isAdmin = false;
+      roleSelection.style.display = 'none';
+      uploadBtn.style.display = 'none';
+      adminPanel.style.display = 'none';
+      renderCategoryChips();
+      renderVideos();
+    });
+
+    // Toggle Sidebar
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      mainContent.classList.toggle('full-width');
+      videoDetailPage.classList.toggle('full-width');
+      historyContainer.classList.toggle('full-width');
+    });
+
+    // Upload Button
+    uploadBtn.addEventListener('click', () => {
+      adminPanel.style.display = adminPanel.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Add Video Button
+    addVideoBtn.addEventListener('click', () => {
+      const url = prompt('Enter YouTube video URL:');
+      if (!url) return;
+      
+      const videoId = extractYouTubeId(url);
+      if (!videoId) {
+        alert('Invalid YouTube URL');
+        return;
+      }
+      
+      const title = prompt('Enter video title:');
+      if (!title) return;
+      
+      const channel = prompt('Enter channel name:');
+      if (!channel) return;
+      
+      const tagsInput = prompt('Enter tags (comma separated):');
+      const tags = tagsInput ? tagsInput.split(',').map(tag => tag.trim()) : [];
+      
+      videos.unshift({
+        id: videoId,
+        title: title,
+        channel: channel,
+        timestamp: 'Just now',
+        duration: '0:00',
+        thumbnail: `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+        description: 'New video added by admin.',
+        tags: tags
+      });
+      
+      renderCategoryChips();
+      renderVideos();
+    });
+
+    // Add Image Button
+    addImageBtn.addEventListener('click', () => {
+      const url = prompt('Enter Google Drive image URL:');
+      if (!url) return;
+      
+      const title = prompt('Enter image title:');
+      if (!title) return;
+      
+      const channel = prompt('Enter channel name:');
+      if (!channel) return;
+      
+      const tagsInput = prompt('Enter tags (comma separated):');
+      const tags = tagsInput ? tagsInput.split(',').map(tag => tag.trim()) : [];
+      
+      // Generate a random ID for the image entry
+      const id = 'img_' + Math.random().toString(36).substr(2, 9);
+      
+      videos.unshift({
+        id: id,
+        title: title,
+        channel: channel,
+        timestamp: 'Just now',
+        duration: 'Image',
+        thumbnail: url,
+        description: 'New image added by admin.',
+        isImage: true,
+        tags: tags
+      });
+      
+      renderCategoryChips();
+      renderVideos();
+    });
+
+    // Get all unique tags from videos
+    function getAllTags() {
+      const tagSet = new Set();
+      videos.forEach(video => {
+        if (video.tags && Array.isArray(video.tags)) {
+          video.tags.forEach(tag => tagSet.add(tag));
+        }
+      });
+      return ['All', ...Array.from(tagSet)];
+    }
+
+    // Render category chips based on unique tags
+    function renderCategoryChips() {
+      const tags = getAllTags();
+      categoryNav.innerHTML = '';
+      
+      tags.forEach(tag => {
+        const chip = document.createElement('div');
+        chip.className = `category-chip ${tag === currentTag ? 'active' : ''}`;
+        chip.textContent = tag;
+        chip.addEventListener('click', () => {
+          currentTag = tag;
+          document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          renderVideos();
+        });
+        categoryNav.appendChild(chip);
+      });
+    }
+
+    // History Button - Show watch history
+    historyButton.addEventListener('click', () => {
+      showHistory();
+    });
+
+    // Show History Function
+    function showHistory() {
+      // Hide other content
+      mainContent.style.display = 'none';
+      videoDetailPage.style.display = 'none';
+      historyContainer.style.display = 'block';
+      
+      // Get watch history from localStorage
+      const watchHistory = JSON.parse(localStorage.getItem('watchHistory')) || [];
+      
+      // Display history
+      historyGrid.innerHTML = '';
+      
+      if (watchHistory.length === 0) {
+        historyGrid.innerHTML = '<div class="empty-history">No watch history found</div>';
+      } else {
+        watchHistory.forEach(video => {
+          const videoCard = createVideoCard(video);
+          historyGrid.appendChild(videoCard);
+        });
+      }
+    }
+
+    // Helper function to create video cards
+    function createVideoCard(video) {
+      const videoCard = document.createElement('div');
+      videoCard.className = 'video-card';
+      videoCard.setAttribute('data-id', video.id);
+      
+      videoCard.innerHTML = `
+        <div class="video-thumbnail">
+          <img src="${video.thumbnail}" alt="${video.title}">
+          <div class="video-duration">${video.duration}</div>
+        </div>
+        <div class="video-info">
+          <div class="channel-avatar"></div>
+          <div class="video-details">
+            <div class="video-title">${video.title}</div>
+            <div class="channel-name">${video.channel}</div>
+            <div class="video-meta">${video.timestamp}</div>
+          </div>
+        </div>
+      `;
+      
+      if (isAdmin) {
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-btn';
+        deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+        
+        deleteButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (historyContainer.style.display === 'block') {
+            removeFromHistory(video.id);
+            showHistory();
+          } else {
+            if (confirm('Are you sure you want to delete this content?')) {
+              const index = videos.findIndex(v => v.id === video.id);
+              if (index !== -1) {
+                videos.splice(index, 1);
+                renderCategoryChips();
+                renderVideos();
+              }
+            }
+          }
+        });
+        
+        videoCard.querySelector('.video-thumbnail').appendChild(deleteButton);
+      }
+      
+      videoCard.addEventListener('click', () => {
+        if (video.isImage) {
+          window.open(video.thumbnail, '_blank');
+        } else {
+          openVideoDetail(video);
+        }
+      });
+      
+      return videoCard;
+    }
+
+    // Extract YouTube ID from URL
+    function extractYouTubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    // Render Videos in Grid
+    function renderVideos() {
+      videoGrid.innerHTML = '';
+      
+      // Filter videos by selected tag
+      const filteredVideos = currentTag === 'All' 
+        ? videos 
+        : videos.filter(video => video.tags && video.tags.includes(currentTag));
+      
+      if (filteredVideos.length === 0) {
+        videoGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">No videos found with this tag.</div>';
+        return;
+      }
+      
+      filteredVideos.forEach(video => {
+        const videoCard = createVideoCard(video);
+        videoGrid.appendChild(videoCard);
+      });
+    }
+
+    // Open Video Detail Page
+    function openVideoDetail(video) {
+      // Add to watch history
+      addToHistory(video);
+      
+      // Hide other content
+      mainContent.style.display = 'none';
+      historyContainer.style.display = 'none';
+      videoDetailPage.style.display = 'block';
+      
+      // Set up the video player
+      videoPlayer.innerHTML = `
+        <iframe 
+          width="100%" 
+          height="100%" 
+          src="https://www.youtube.com/embed/${video.id}" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      `;
+      
+      // Set video details
+      detailTitle.textContent = video.title;
+      videoStats.textContent = video.timestamp;
+      
+      // Display video tags
+      videoTags.innerHTML = '';
+      if (video.tags && video.tags.length > 0) {
+        video.tags.forEach(tag => {
+          const tagElement = document.createElement('div');
+          tagElement.className = 'video-tag';
+          tagElement.textContent = tag;
+          videoTags.appendChild(tagElement);
+        });
+      }
+      
+      // Generate related videos (excluding current video)
+      relatedVideos.innerHTML = '';
+      videos.filter(v => v.id !== video.id).slice(0, 10).forEach(relatedVideo => {
+        const relatedVideoElement = document.createElement('div');
+        relatedVideoElement.className = 'related-video';
+        relatedVideoElement.style.display = 'flex';
+        relatedVideoElement.style.marginBottom = '1rem';
+        relatedVideoElement.style.cursor = 'pointer';
+        
+        relatedVideoElement.innerHTML = `
+          <div style="width: 168px; height: 94px; margin-right: 0.8rem; flex-shrink: 0; position: relative;">
+            <img src="${relatedVideo.thumbnail}" alt="${relatedVideo.title}" style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="position: absolute; bottom: 4px; right: 4px; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.8rem;">${relatedVideo.duration}</div>
+          </div>
+          <div style="flex-grow: 1;">
+            <div style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.4rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${relatedVideo.title}</div>
+            <div style="color: var(--text-secondary); font-size: 0.8rem;">${relatedVideo.channel}</div>
+            <div style="color: var(--text-secondary); font-size: 0.8rem;">${relatedVideo.timestamp}</div>
+          </div>
+        `;
+        
+        relatedVideoElement.addEventListener('click', () => {
+          openVideoDetail(relatedVideo);
+        });
+        
+        relatedVideos.appendChild(relatedVideoElement);
+      });
+    }
+
+    // Close Video Detail Page
+    function closeVideoDetail() {
+      videoDetailPage.style.display = 'none';
+      historyContainer.style.display = 'none';
+      mainContent.style.display = 'block';
+      
+      // Clear the video player to stop playback
+      videoPlayer.innerHTML = '';
+    }
+
+    // Add to watch history
+    function addToHistory(video) {
+      // Get existing history or initialize empty array
+      let watchHistory = JSON.parse(localStorage.getItem('watchHistory')) || [];
+      
+      // Check if video already exists in history
+      const existingIndex = watchHistory.findIndex(item => item.id === video.id);
+      if (existingIndex !== -1) {
+        // Remove existing entry to reposition it at the top
+        watchHistory.splice(existingIndex, 1);
+      }
+      
+      // Add video to beginning of history array
+      watchHistory.unshift(video);
+      
+      // Limit history size to 20 items
+      if (watchHistory.length > 20) {
+        watchHistory = watchHistory.slice(0, 20);
+      }
+      
+      // Save back to localStorage
+      localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
+    }
+
+    // Remove from watch history
+    function removeFromHistory(videoId) {
+      let watchHistory = JSON.parse(localStorage.getItem('watchHistory')) || [];
+      watchHistory = watchHistory.filter(item => item.id !== videoId);
+      localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
+    }
+
+    // Logo click event
+    document.querySelector('.logo').addEventListener('click', () => {
+      videoDetailPage.style.display = 'none';
+      historyContainer.style.display = 'none';
+      mainContent.style.display = 'block';
+      videoPlayer.innerHTML = '';
+    });
+
+    // Initialize the page
+    renderCategoryChips();
+    renderVideos();
+  </script>
+</body>
+</html>

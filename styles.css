@@ -1,0 +1,79 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: var(--darker-bg);
+  /* Make header taller: */
+  padding: 1.5rem 1rem;   /* Increased from 0.5rem 1rem */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  font-size: 2rem; /* Optional: make logo text larger */
+}
+
+main {
+  max-width: 800px;
+  margin: 2em auto;
+  background: #fff;
+  padding: 2em;
+  border-radius: 8px;
+}
+
+form {
+  margin-bottom: 1em;
+}
+
+input[type="text"] {
+  padding: 0.5em;
+  margin-right: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 0.5em 1em;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #005fa3;
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.card {
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  width: 230px;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.card img, .card iframe {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.tags {
+  margin-top: 0.5em;
+  color: #555;
+  font-size: 0.9em;
+}
