@@ -638,60 +638,6 @@
     // Example: document.getElementById('roleSelection').style.display = 'flex';
   };
 });
-// Demo data with tags
-   
- const videos = [
-      {
-        id: 'dQw4w9WgXcQ',
-        title: 'Introduction to Engineering Principles',
-        channel: 'EJUST Engineering',
-        timestamp: '2 weeks ago',
-        duration: '14:33',
-        thumbnail: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg',
-        description: 'This lecture covers the fundamental principles of engineering that every EJUST student should know.',
-        tags: ['Engineering', 'Introduction']
-      },
-      {
-        id: 'V74l_zS1x8E',
-        title: 'COMPUTER SCIENCE explained in 17 Minutes',
-        channel: 'Wacky Science',
-        timestamp: '11 months ago',
-        duration: '16:49',
-        thumbnail: 'https://i.ytimg.com/vi/V74l_zS1x8E/mqdefault.jpg',
-        description: 'Computer Science compressed into 17 minutes!',
-        tags: ['Computer Science', 'Programming']
-      },
-      {
-        id: 'LBEkcNfG4iQ',
-        title: 'ALL OF PHYSICS explained in 14 Minutes',
-        channel: 'Wacky Science',
-        timestamp: '1 year ago',
-        duration: '14:20',
-        thumbnail: 'https://i.ytimg.com/vi/LBEkcNfG4iQ/mqdefault.jpg',
-        description: 'Physics fundamentals explained simply and concisely.',
-        tags: ['Physics', 'Science']
-      },
-      {
-        id: 'JdHZ2jAFzzU',
-        title: 'Animation vs. Physics',
-        channel: 'Alan Becker',
-        timestamp: '1 year ago',
-        duration: '16:08',
-        thumbnail: 'https://i.ytimg.com/vi/JdHZ2jAFzzU/mqdefault.jpg',
-        description: 'Animation vs Physics! Watch as stick figures battle against the laws of physics.',
-        tags: ['Physics', 'Animation', 'Fun']
-      },
-      {
-        id: 'ZSFDm3UYkeE',
-        title: 'Animation vs. Math',
-        channel: 'Alan Becker',
-        timestamp: '1 year ago',
-        duration: '14:03',
-        thumbnail: 'https://i.ytimg.com/vi/ZSFDm3UYkeE/mqdefault.jpg',
-        description: 'Animation vs Mathematics! A creative way to visualize mathematical concepts through animation.',
-        tags: ['Mathematics', 'Animation', 'Fun']
-      }
-    ];
 
     // DOM Elements
     const roleSelection = document.getElementById('roleSelection');
@@ -715,6 +661,62 @@
     const historyContainer = document.getElementById('historyContainer');
     const historyGrid = document.getElementById('historyGrid');
     const categoryNav = document.getElementById('categoryNav');
+   let videos = [];
+    let isAdmin = false;
+    // Fetch videos from JSON file
+    fetch('videos.json')
+      .then(response => response.json())
+      .then(data => {
+        videos = data;
+        renderCategoryChips();
+        renderVideos();
+      })
+      .catch(error => {
+        console.error('Error loading videos:', error);
+        videoGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">Error loading videos. Please try again later.</div>';
+      });
+
+    // Modified Add Video Button
+    addVideoBtn.addEventListener('click', () => {
+      const url = prompt('Enter YouTube video URL:');
+      if (!url) return;
+      
+      const videoId = extractYouTubeId(url);
+      if (!videoId) {
+        alert('Invalid YouTube URL');
+        return;
+      }
+      
+      const title = prompt('Enter video title:');
+      if (!title) return;
+      
+      const channel = prompt('Enter channel name:');
+      if (!channel) return;
+      
+      const tagsInput = prompt('Enter tags (comma separated):');
+      const tags = tagsInput ? tagsInput.split(',').map(tag => tag.trim()) : [];
+      
+      const newVideo = {
+        id: videoId,
+        title: title,
+        channel: channel,
+        timestamp: 'Just now',
+        duration: '0:00',
+        thumbnail: `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+        description: 'New video added by admin.',
+        tags: tags
+      };
+
+      // Add to local array and re-render
+      videos.unshift(newVideo);
+      renderCategoryChips();
+      renderVideos();
+
+      // Show instructions for persistent storage
+      alert('For permanent storage:\n1. Copy this video object:\n' + 
+            JSON.stringify(newVideo, null, 2) + 
+            '\n2. Add it to videos.json in your GitHub repository');
+    });
 
     // Current selected tag
     let currentTag = 'All';
