@@ -664,17 +664,20 @@
    let videos = [];
     let isAdmin = false;
     // Fetch videos from JSON file
-    fetch('videos.json')
-      .then(response => response.json())
-      .then(data => {
-        videos = data;
-        renderCategoryChips();
-        renderVideos();
-      })
-      .catch(error => {
-        console.error('Error loading videos:', error);
-        videoGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">Error loading videos. Please try again later.</div>';
-      });
+  fetch('videos.json')
+  .then(response => {
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.json();
+  })
+  .then(data => {
+    // data is your parsed JSON array
+    videos = data;
+    renderCategoryChips();
+    renderVideos();
+  })
+  .catch(error => {
+    console.error('Error loading videos:', error);
+  });
 
     // Modified Add Video Button
     addVideoBtn.addEventListener('click', () => {
