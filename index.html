@@ -663,6 +663,14 @@
     const categoryNav = document.getElementById('categoryNav');
    let videos = [];
     let isAdmin = false;
+    if (window.location.pathname.endsWith('/student')) {
+  isAdmin = false;
+  roleSelection.style.display = 'none';
+  uploadBtn.style.display = 'none';
+  adminPanel.style.display = 'none';
+  renderCategoryChips();
+  renderVideos();
+}
     // Fetch videos from JSON file
   fetch('videos.json')
   .then(response => {
