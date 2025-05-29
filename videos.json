@@ -1,22 +1,32 @@
 [
   {
-    "id": "dQw4w9WgXcQ",
-    "title": "Introduction to Engineering Principles",
-    "channel": "EJUST Engineering",
+    "id": "3yKAlf96vyQ",
+    "title": "Explaining Electromagnetism part1",
+    "channel": ".",
     "timestamp": "2 weeks ago",
-    "duration": "14:33",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
-    "description": "This lecture covers the fundamental principles of engineering that every EJUST student should know.",
-    "tags": ["Engineering", "Introduction"]
+    "duration": "2:30",
+    "thumbnail": "https://youtu.be/3yKAlf96vyQ/mqdefault.jpg",
+    "description": "This lecture covers the fundamental principles of Electromagnetism in a simple, fun way.",
+    "tags": ["Engineering", "Physics","student teaching"]
   },
   {
     "id": "V74l_zS1x8E",
     "title": "COMPUTER SCIENCE explained in 17 Minutes",
     "channel": "Wacky Science",
-    "timestamp": "11 months ago",
+    "timestamp": "1 months ago",
     "duration": "16:49",
     "thumbnail": "https://i.ytimg.com/vi/V74l_zS1x8E/mqdefault.jpg",
     "description": "Computer Science compressed into 17 minutes!",
     "tags": ["Computer Science", "Programming"]
+  }
+  {
+    "id": "UP2wJmiHLxQ",
+    "title": "Magnetic field lines visualization Pt1",
+    "channel": "EJUST-LEARN",
+    "timestamp": "2 weeks ago",
+    "duration": "2:00",
+    "thumbnail": "https://youtu.be/UP2wJmiHLxQ/mqdefault.jpg",
+    "description": "Magnetic field lines visualization Pt1",
+    "tags": ["Physics", "student teaching","Engineering"]
   }
 ]
