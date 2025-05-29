@@ -5,7 +5,7 @@
     "channel": ".",
     "timestamp": "2 weeks ago",
     "duration": "2:30",
-    "thumbnail": "https://youtu.be/3yKAlf96vyQ/mqdefault.jpg",
+    "thumbnail": "https://img.youtube.com/vi/3yKAlf96vyQ/hqdefault.jpg",
     "description": "This lecture covers the fundamental principles of Electromagnetism in a simple, fun way.",
     "tags": ["Engineering", "Physics","student teaching"]
   },
@@ -25,7 +25,7 @@
     "channel": "EJUST-LEARN",
     "timestamp": "2 weeks ago",
     "duration": "2:00",
-    "thumbnail": "https://youtu.be/UP2wJmiHLxQ/mqdefault.jpg",
+    "thumbnail": "https://img.youtube.com/vi/UP2wJmiHLxQ/hqdefault.jpg",
     "description": "Magnetic field lines visualization Pt1",
     "tags": ["Physics", "student teaching","Engineering"]
   }
